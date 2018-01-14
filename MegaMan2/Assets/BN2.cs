@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ButtonNavigation : MonoBehaviour {
+public class BN2 : MonoBehaviour {
 
     //make sure to keep UnityEngine.SceneManagement in top
 
@@ -22,7 +21,7 @@ public class ButtonNavigation : MonoBehaviour {
     void Update()
     {
 
-//Arrow Function Code
+        //Arrow Function Code
 
         //If the player presses the S key, move the key down one
         if (Input.GetKeyDown(KeyCode.S))
@@ -48,27 +47,27 @@ public class ButtonNavigation : MonoBehaviour {
             }
         }
 
-//Scene Loading Code
+        //Scene Loading Code
 
-        //If selecting normal, load the boss selection scene for Normal mode
+        //If selecting Start, load the level selection menu
         if (Input.GetKeyDown(KeyCode.Return))
         {
             if (index == 0)
             {
-                SceneManager.LoadScene("StartPassword");
+                SceneManager.LoadScene("BossLevel");
             }
         }
-        //If selecting Difficult, load the boss selection scene for Difficult mode
+        //If selecting Password, load the Password scene
         if (Input.GetKeyDown(KeyCode.Return))
         {
             if (index == 1)
             {
-                SceneManager.LoadScene("StartPassword");
+                SceneManager.LoadScene("MenuTest");
             }
         }
     }
 
-//Blinking Code
+    //Blinking Code
 
     void ArrowBlinking()
     {
