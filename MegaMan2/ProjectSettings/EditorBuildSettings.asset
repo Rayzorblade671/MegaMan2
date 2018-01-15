@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestScene.unity
     guid: bd8538ce50a4c7f4bb01d6978ddee643
+  - enabled: 1
+    path: Assets/Scenes/PasswordInput.unity
+    guid: a3c2c4f556c49814180abb76f44a1b7f

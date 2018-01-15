@@ -62,7 +62,7 @@ public class BN2 : MonoBehaviour {
         {
             if (index == 1)
             {
-                SceneManager.LoadScene("MenuTest");
+                SceneManager.LoadScene("PasswordInput");
             }
         }
     }
