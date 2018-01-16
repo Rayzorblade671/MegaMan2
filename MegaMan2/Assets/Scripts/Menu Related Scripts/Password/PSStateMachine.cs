@@ -6,9 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class PSStateMachine : MonoBehaviour {
 
-    private PasswordSelection passSelect;
+    private PasswordSelection passSelect; //Calling the other script on the same gameobject
 
-    enum STATES
+    public GameObject[] RedPins;
+    private int pinCount;
+    private bool maxPins = false;
+
+    enum STATES //ENUM States for each tile
     {
         TileA1,
         TileA2,
@@ -37,13 +41,13 @@ public class PSStateMachine : MonoBehaviour {
         TileE5,
     }
 
-    STATES curState = STATES.TileA1;
+    STATES curState = STATES.TileA1; //Setting the current tile the player starts on to A1
 
     Dictionary<STATES, Action> fsm = new Dictionary<STATES, Action>();
 
 	// Use this for initialization
 	void Start () {
-        passSelect = GameObject.Find("SelectBoss").GetComponent<PasswordSelection>();
+        passSelect = GameObject.Find("SelectBoss").GetComponent<PasswordSelection>(); //Looking for the prefab "SelectBoss" (the flashy cursor) and setting that to passSelect
 
         fsm.Add(STATES.TileA1, A1State);
         fsm.Add(STATES.TileA2, A2State);
@@ -76,9 +80,14 @@ public class PSStateMachine : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if(maxPins == true)
+        {
+            SceneManager.LoadScene("StartPassword");
+        }
+
         fsm[curState].Invoke();
 
-        if(curState == STATES.TileA1)
+        if(curState == STATES.TileA1) //When the tile is on this state, call the appropriate state
         {
             A1State();
         }
@@ -209,27 +218,33 @@ public class PSStateMachine : MonoBehaviour {
         curState = newState;
     }
 
-    void A1State()
+    void A1State() //When the tile is in the A1 tile and is set to the A1State, call the function of A1 from the PasswordSelection Script
     {
-        if (passSelect.timerMaximum <= passSelect.timerHitMaximum)
+        if (passSelect.timerMaximum <= passSelect.timerHitMaximum) //Check the timer so it doesn't force 2 functions in one frame
         {
             passSelect.A1();
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.S)) // If the player presses S...
             {
-                passSelect.B1();
-                SetState(STATES.TileB1);
-                passSelect.ResetTimer();
+                passSelect.B1(); // Call the function to the appropriate tile
+                SetState(STATES.TileB1); // Set the State to the appropriate tile
+                passSelect.ResetTimer(); // Reset the timer for when you need it next
             }
-            else if (Input.GetKeyDown(KeyCode.D))
+            else if (Input.GetKeyDown(KeyCode.D)) // If the player presses a different key, do the steps above in accordance to the new tile
             {
                 passSelect.A2();
                 SetState(STATES.TileA2);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-4.17f, 1.73f, -0.3f), Quaternion.identity);
+                RedPins[0].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -257,10 +272,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileA1);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-3.56f, 1.73f, -0.3f), Quaternion.identity);
+                RedPins[1].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -288,10 +309,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileA2);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-2.97f, 1.73f, -0.3f), Quaternion.identity);
+                RedPins[2].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -319,10 +346,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileA3);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-2.36f, 1.73f, -0.3f), Quaternion.identity);
+                RedPins[3].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -344,10 +377,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileA4);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-1.76f, 1.73f, -0.3f), Quaternion.identity);
+                RedPins[4].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -375,10 +414,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileA1);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-4.17f, 1.12f, -0.3f), Quaternion.identity);
+                RedPins[5].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -412,10 +457,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileA2);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-3.56f, 1.12f, -0.3f), Quaternion.identity);
+                RedPins[6].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -449,10 +500,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileA3);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-2.97f, 1.12f, -0.3f), Quaternion.identity);
+                RedPins[7].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -486,10 +543,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileA4);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-2.36f, 1.12f, -0.3f), Quaternion.identity);
+                RedPins[8].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -517,10 +580,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileA5);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-1.76f, 1.12f, -0.3f), Quaternion.identity);
+                RedPins[9].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -548,10 +617,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileB1);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-4.17f, 0.5f, -0.3f), Quaternion.identity);
+                RedPins[10].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -585,10 +660,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileB2);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-3.56f, 0.5f, -0.3f), Quaternion.identity);
+                RedPins[11].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -622,10 +703,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileB3);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-2.97f, 0.5f, -0.3f), Quaternion.identity);
+                RedPins[12].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -659,10 +746,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileB4);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-2.36f, 0.5f, -0.3f), Quaternion.identity);
+                RedPins[13].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -690,10 +783,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileB5);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-1.76f, 0.5f, -0.3f), Quaternion.identity);
+                RedPins[14].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -721,10 +820,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileC1);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-4.17f, -0.13f, -0.3f), Quaternion.identity);
+                RedPins[15].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -758,10 +863,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileC2);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-3.56f, -0.13f, -0.3f), Quaternion.identity);
+                RedPins[16].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -795,10 +906,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileC3);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-2.97f, -0.13f, -0.3f), Quaternion.identity);
+                RedPins[17].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -832,10 +949,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileC4);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-2.36f, -0.13f, -0.3f), Quaternion.identity);
+                RedPins[18].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -863,10 +986,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileC5);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-1.76f, -0.13f, -0.3f), Quaternion.identity);
+                RedPins[19].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -888,10 +1017,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileD1);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-4.17f, -0.75f, -0.3f), Quaternion.identity);
+                RedPins[20].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -919,10 +1054,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileD2);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-3.56f, -0.75f, -0.3f), Quaternion.identity);
+                RedPins[21].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -950,10 +1091,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileD3);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-2.97f, -0.75f, -0.3f), Quaternion.identity);
+                RedPins[22].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -981,10 +1128,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileD4);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-2.36f, -0.75f, -0.3f), Quaternion.identity);
+                RedPins[23].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }
@@ -1006,10 +1159,16 @@ public class PSStateMachine : MonoBehaviour {
                 SetState(STATES.TileD5);
                 passSelect.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return)) // If the player is on the tile, and hits Enter, place a Red Pin there
             {
-                Instantiate(GameObject.Find("Red Pin"), new Vector3(-1.76f, -0.75f, -0.3f), Quaternion.identity);
+                RedPins[24].SetActive(true);
                 passSelect.ResetTimer();
+                pinCount++;
+
+                if (pinCount >= 9)
+                {
+                    maxPins = true;
+                }
             }
         }
     }

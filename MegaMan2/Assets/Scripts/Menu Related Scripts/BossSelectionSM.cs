@@ -21,7 +21,7 @@ public class BossSelectionSM : MonoBehaviour {
         Crash
     }
 
-    tileStates curState = tileStates.Wily;
+    tileStates curState = tileStates.Bubble;
 
     Dictionary<tileStates, Action> fsm = new Dictionary<tileStates, Action>();
     //tileStates curState = tileStates.Wily;

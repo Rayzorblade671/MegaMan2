@@ -17,10 +17,10 @@ public class PasswordSelection : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        timerHitMax += Time.deltaTime;
+        timerHitMax += Time.deltaTime; //More code for creating the timer that prevents calling 2 functions from within the same frame
     }
 
-    public void ResetTimer()
+    public void ResetTimer() //Reset the timer when it's reached it's max
     {
         timerHitMax = 0;
     }
@@ -40,6 +40,9 @@ public class PasswordSelection : MonoBehaviour {
             return timerHitMax;
         }
     }
+
+
+    //Setting the transform location of each tile
 
     public void A1()
     {
