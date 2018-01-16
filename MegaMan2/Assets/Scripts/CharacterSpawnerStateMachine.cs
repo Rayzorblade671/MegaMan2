@@ -50,8 +50,9 @@ public class CharacterSpawnerStateMachine : MonoBehaviour
 
         if (characterSpawner.CameraCanSee == true && isAlive == false)
         {
-            Instantiate(characterSpawner.Character, transform.position, transform.rotation);
-            spawnedCharacter = characterSpawner.Character;
+            spawnedCharacter = Instantiate(characterSpawner.Character, transform.position, transform.rotation);
+            spawnedCharacter.transform.parent = gameObject.transform;
+            //spawnedCharacter = characterSpawner.Character;
             //characterSpawner.Character.name = "Enemy " + spawnedCharacter + transform.position;
             isAlive = true;
             SetState(CharacterSpawnerStates.OFF);
@@ -63,7 +64,7 @@ public class CharacterSpawnerStateMachine : MonoBehaviour
         Debug.Log("Off");
 
         //GameObject newEnemy = GameObject.Find("Enemy " + transform.position + "(Clone)");
-        if (GameObject.Find(characterSpawner.Character.name + "(Clone)") == null)
+        if (gameObject.transform.Find(characterSpawner.Character.name + "(Clone)") == null)
         {
             isAlive = false;
             Debug.Log(characterSpawner.Character.name);
@@ -72,14 +73,14 @@ public class CharacterSpawnerStateMachine : MonoBehaviour
             isAlive = true;
 
 
-        if (characterSpawner.SpawnDistance >= 1.5 || characterSpawner.SpawnDistance <= -1.5)
+        if (characterSpawner.SpawnDistance >= 16 || characterSpawner.SpawnDistance <= -16)
         {
             characterSpawner.CameraCanSee = false;
         }
 
         if (characterSpawner.CameraCanSee == false && isAlive == false)
         {
-            if (characterSpawner.SpawnDistance <= 1 && characterSpawner.SpawnDistance >= -1)
+            if (characterSpawner.SpawnDistance <= 15 && characterSpawner.SpawnDistance >= -15)
             {
                 characterSpawner.CameraCanSee = true;
                 SetState(CharacterSpawnerStates.ON);

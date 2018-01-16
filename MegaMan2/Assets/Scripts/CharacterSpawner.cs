@@ -44,7 +44,7 @@ public class CharacterSpawner : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-       
+        mainCam = Camera.main;
     }
 
     // Update is called once per frame

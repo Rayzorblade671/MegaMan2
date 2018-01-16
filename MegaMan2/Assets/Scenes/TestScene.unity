@@ -227,7 +227,7 @@ Prefab:
         type: 2}
       propertyPath: mainCam
       value: 
-      objectReference: {fileID: 653492087}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e2871c886cb2b3f4688383cf99676551, type: 2}
   m_IsPrefabParent: 0
