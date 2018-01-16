@@ -221,7 +221,7 @@ Prefab:
         type: 2}
       propertyPath: character
       value: 
-      objectReference: {fileID: 1194124336607990, guid: 79769fbe24730ba48b433e0d9c3b6766,
+      objectReference: {fileID: 1415783659138738, guid: f54a913214fbfb046afdb78a99790809,
         type: 2}
     - target: {fileID: 114337604726241818, guid: e2871c886cb2b3f4688383cf99676551,
         type: 2}
@@ -240,8 +240,8 @@ GameObject:
   m_Component:
   - component: {fileID: 469265681}
   - component: {fileID: 469265680}
-  - component: {fileID: 469265679}
   - component: {fileID: 469265678}
+  - component: {fileID: 469265679}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -283,18 +283,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &469265679
-BoxCollider:
+--- !u!61 &469265679
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 469265677}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.99999994, y: 1}
+  m_EdgeRadius: 0
 --- !u!33 &469265680
 MeshFilter:
   m_ObjectHideFlags: 0
