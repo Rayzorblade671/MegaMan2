@@ -5,11 +5,16 @@ using UnityEngine;
 public class BossSelection : MonoBehaviour {
 
     [SerializeField] Transform selectBoss;
+    public static BossSelection instance;
     float timerMax = 0.2f;
     float timeHitMax;
 
-	// Use this for initialization
-	void Start ()
+    private void Awake()
+    {
+        instance = this;
+    }
+    // Use this for initialization
+    void Start ()
     {
         selectBoss.GetComponent<Transform>();
 
