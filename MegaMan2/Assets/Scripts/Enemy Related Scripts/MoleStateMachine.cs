@@ -5,7 +5,10 @@ using System;
 
 public class MoleStateMachine : MonoBehaviour
 {
-    private bool movingUp = true;
+    [SerializeField] private bool movingUp = true;
+    [SerializeField] private GameObject targetDestination;
+    [SerializeField] private GameObject destination;
+    [SerializeField] Transform Up;
 
     //StateMachine Setup ---------------------------------------------------------------------
     private EnemyData enemyData;
@@ -30,7 +33,14 @@ public class MoleStateMachine : MonoBehaviour
     {
         enemyData = GetComponent<EnemyData>();
 
-        enemyData.Health = 3;
+        enemyData.Health = UnityEngine.Random.Range(6, 10);
+        enemyData.MoveSpeed = 3;
+
+        if (transform.position.y < enemyData.MainCam.transform.position.y)
+            movingUp = true;
+        if (transform.position.y > enemyData.MainCam.transform.position.y)
+            movingUp = false;
+
 
         msm.Add(MoleStates.ALIVE, new Action(AliveState));
         msm.Add(MoleStates.DEAD, new Action(DeadState));
@@ -39,15 +49,7 @@ public class MoleStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y < enemyData.MainCam.transform.position.y)
-            movingUp = true;
-        if (transform.position.y > enemyData.MainCam.transform.position.y)
-            movingUp = false;
-
-        if (movingUp)
-            MoveUp();
-        else
-            MoveDown();
+        float step = enemyData.MoveSpeed * Time.deltaTime;
 
         msm[currentState].Invoke();
     }
@@ -55,17 +57,58 @@ public class MoleStateMachine : MonoBehaviour
     void MoveUp()
     {
         movingUp = true;
+        enemyData.Rb.AddForce(transform.up * enemyData.MoveSpeed);
     }
 
     void MoveDown()
     {
+        movingUp = false;
+        enemyData.Rb.AddForce(transform.up * -enemyData.MoveSpeed);
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.name == "Bullet")
+        {
+            enemyData.Health--;
+        }
+
+        if (collision.gameObject.tag == "Environment");
+        {
+            //gameObject.GetComponent<Collider2D>().isTrigger = true;
+            Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
+            enemyData.MoveSpeed = 1;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Environment")
+        {
+            enemyData.MoveSpeed = 3;
+        }
     }
 
     //States -----------------------------------------------------------------------------
     void AliveState()
     {
+        if (movingUp)
+        {
+            MoveUp();
+        }
+
+        else
+        {
+            MoveDown();
+        }
+            
+
         if (enemyData.DistanceToCamX >= 16 || enemyData.DistanceToCamX <= -16)
+        {
+            SetState(MoleStates.DEAD);
+        }
+
+        if(enemyData.Health == 0)
         {
             SetState(MoleStates.DEAD);
         }

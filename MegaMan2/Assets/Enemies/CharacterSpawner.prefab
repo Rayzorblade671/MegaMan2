@@ -81,8 +81,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3adcded688f22a44934637b92e23c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
-  mainCamTrigger: {fileID: 0}
+  character: {fileID: 1415783659138738, guid: 024ca46847cc4c94487f95fb4fa6b473, type: 2}
+  mainCam: {fileID: 0}
   cameraCanSee: 0
 --- !u!114 &114751297398590410
 MonoBehaviour:
@@ -95,3 +95,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eae87a95694709f4eb4680dcbab809ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAlive: 0

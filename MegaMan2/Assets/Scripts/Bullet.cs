@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
 
     public Direction bulletDirection = Direction.RIGHT;
     public float speed = 5.0f;
-    public int damage = 5;
+    public int damage = 2;
 
     private Transform _transform;
 
@@ -33,7 +33,7 @@ public class Bullet : MonoBehaviour
     // Allows bullet to collide with Enemy tag
     void OnCollisionEnter2D(Collision2D collision){
         if (collision.collider.tag == "Enemy") {
-            collision.collider.gameObject.GetComponent<Enemy>().Damage(damage);
+            collision.collider.gameObject.GetComponent<EnemyData>().Damage(damage);
             Destroy(gameObject);
         }
 
