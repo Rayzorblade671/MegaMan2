@@ -5,6 +5,8 @@ using System;
 
 public class MoleStateMachine : MonoBehaviour
 {
+    private bool movingUp = true;
+
     //StateMachine Setup ---------------------------------------------------------------------
     private EnemyData enemyData;
 
@@ -37,13 +39,33 @@ public class MoleStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.position.y < enemyData.MainCam.transform.position.y)
+            movingUp = true;
+        if (transform.position.y > enemyData.MainCam.transform.position.y)
+            movingUp = false;
+
+        if (movingUp)
+            MoveUp();
+        else
+            MoveDown();
+
         msm[currentState].Invoke();
+    }
+
+    void MoveUp()
+    {
+        movingUp = true;
+    }
+
+    void MoveDown()
+    {
+
     }
 
     //States -----------------------------------------------------------------------------
     void AliveState()
     {
-        if (enemyData.DistanceToCam >= 16 || enemyData.DistanceToCam <= -16)
+        if (enemyData.DistanceToCamX >= 16 || enemyData.DistanceToCamX <= -16)
         {
             SetState(MoleStates.DEAD);
         }

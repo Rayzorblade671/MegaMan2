@@ -14,7 +14,8 @@ public class EnemyData : MonoBehaviour
     [SerializeField] bool cameraCanSee = false;
 
     private Animator animator;
-    private float distanceToCam;
+    private float distanceToCamX;
+    private float distanceToCamY;
 
     //Accessors
     public int Strength
@@ -66,11 +67,18 @@ public class EnemyData : MonoBehaviour
         set { moveSpeed = value; }
     }
 
-    public float DistanceToCam
+    public float DistanceToCamX
     {
-        get { return distanceToCam; }
+        get { return distanceToCamX; }
 
-        set { distanceToCam = value; }
+        set { distanceToCamX = value; }
+    }
+
+    public float DistanceToCamY
+    {
+        get { return distanceToCamY; }
+
+        set { distanceToCamY = value; }
     }
 
     // Use this for initialization
@@ -82,6 +90,7 @@ public class EnemyData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        distanceToCam = mainCam.transform.position.x - gameObject.transform.position.x;
+        distanceToCamX = mainCam.transform.position.x - gameObject.transform.position.x;
+        distanceToCamY = mainCam.transform.position.y - gameObject.transform.position.y;
     }
 }
