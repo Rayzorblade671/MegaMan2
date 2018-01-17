@@ -1,498 +1,448 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PasswordScript : MonoBehaviour {
 
-    //[SerializeField] Transform selectBoss; // this holds the SelectBoss prefab that shows the player what's highlighted
+    [SerializeField] Transform selectBoss; // this holds the SelectBoss prefab that shows the player what's highlighted
     public GameObject[] RedPins; // array that holds all the red pin locations
     public GameObject[] tilePositions; // array that holds all the grid space positions
-    Transform curPosition; // my current position Transform
-    [SerializeField] bool boxUsed = false; // a bool to check if the Box is currently being used so that I can't press Enter twice
+    bool boxUsed = false; // a bool to check if the Box is currently being used so that I can't press Enter twice
     private int pinCount = 0; // the int that counts how many pins I have on the board
+    int boxIndex = 0;
+    bool CorrectPW;
 
     // Use this for initialization
-    void Start () {
-        curPosition = tilePositions[0].GetComponent<Transform>(); // setting my starting position to tile A1
-        //selectBoss = tilePositions[0].GetComponent<Transform>(); // setting the SelectBoss prefab to go where the curPosition is
+    void Start() {
+
+        selectBoss = gameObject.GetComponent<Transform>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-        BoxSelection(); //calling the functions every frame
+
+    // Update is called once per frame
+    void Update() {
+        BoxSelection();
         BoxMarked();
-	}
+
+        if (CorrectPW == true)
+        {
+            SceneManager.LoadScene("TestScene");
+        }
+
+        else if(pinCount >= 9)
+        {
+            if (tilePositions[1].GetComponent<BoxCheck>().boxChecked == true && tilePositions[5].GetComponent<BoxCheck>().boxChecked == true)
+            {
+                print("2requirements met");
+                if (tilePositions[11].GetComponent<BoxCheck>().boxChecked == true && tilePositions[14].GetComponent<BoxCheck>().boxChecked == true)
+                {
+                    print("4 requirements met");
+                    if (tilePositions[15].GetComponent<BoxCheck>().boxChecked == true && tilePositions[16].GetComponent<BoxCheck>().boxChecked == true)
+                    {
+                        print("6 requirements met");
+                        if (tilePositions[18].GetComponent<BoxCheck>().boxChecked == true && tilePositions[20].GetComponent<BoxCheck>().boxChecked == true)
+                        {
+                            print("8 requirements met");
+                              if(tilePositions[23].GetComponent<BoxCheck>().boxChecked == true)
+                            {
+                                print("password correct");
+                                CorrectPW = true;
+                                Debug.Log(CorrectPW);
+                            }
+                        }
+                    }
+                }
+            } 
+        }
+
+        else if (pinCount >= 9)
+        {
+            CorrectPW = false;
+            if (CorrectPW == false)
+            {
+                SceneManager.LoadScene("StartPassword");
+            }
+        }
+    }
 
     private void BoxSelection()
-    { //If i press D while on tile A1, move to tile A2. The debug checks to see which tile in the array I'm on
-        if (Input.GetKeyDown(KeyCode.D) && curPosition == tilePositions[0].GetComponent<Transform>())
+    {
+        if (Input.GetKeyDown(KeyCode.D))
         {
-            curPosition = tilePositions[1].GetComponent<Transform>();
-            //selectBoss.Transform.position = curPosition;
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[0].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[5].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-// Tile A2
-        else if (Input.GetKeyDown(KeyCode.A) && curPosition == tilePositions[1].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[0].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[1].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[6].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.D) && curPosition == tilePositions[1].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[2].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-// Tile A3
-        else if (Input.GetKeyDown(KeyCode.A) && curPosition == tilePositions[2].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[1].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[2].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[7].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.D) && curPosition == tilePositions[2].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[3].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-// Tile A4
-        else if (Input.GetKeyDown(KeyCode.A) && curPosition == tilePositions[3].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[2].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[3].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[8].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.D) && curPosition == tilePositions[3].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[4].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-// Tile A5
-        else if (Input.GetKeyDown(KeyCode.A) && curPosition == tilePositions[4].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[3].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[4].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[9].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-// Tile B1
-        else if (Input.GetKeyDown(KeyCode.A) && curPosition == tilePositions[5].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[0].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.D) && curPosition == tilePositions[5].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[6].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[5].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[10].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-// Tile B2
-        else if (Input.GetKeyDown(KeyCode.A) && curPosition == tilePositions[6].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[5].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.D) && curPosition == tilePositions[6].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[7].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[6].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[11].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.W) && curPosition == tilePositions[6].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[1].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-// Tile B3
-        else if (Input.GetKeyDown(KeyCode.A) && curPosition == tilePositions[7].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[6].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.D) && curPosition == tilePositions[7].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[8].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[7].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[12].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.W) && curPosition == tilePositions[7].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[2].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-// Tile B4
-        else if (Input.GetKeyDown(KeyCode.A) && curPosition == tilePositions[8].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[7].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.D) && curPosition == tilePositions[8].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[9].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[8].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[13].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.W) && curPosition == tilePositions[8].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[3].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-// Tile B5
-        else if (Input.GetKeyDown(KeyCode.A) && curPosition == tilePositions[9].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[8].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[9].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[14].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.W) && curPosition == tilePositions[9].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[4].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-// Tile C1
-        else if (Input.GetKeyDown(KeyCode.D) && curPosition == tilePositions[10].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[11].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[10].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[15].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.W) && curPosition == tilePositions[10].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[5].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-// Tile C2
-        else if (Input.GetKeyDown(KeyCode.A) && curPosition == tilePositions[11].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[10].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.D) && curPosition == tilePositions[11].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[12].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[11].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[16].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.W) && curPosition == tilePositions[11].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[6].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-// Tile C3
-        else if (Input.GetKeyDown(KeyCode.A) && curPosition == tilePositions[12].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[11].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.D) && curPosition == tilePositions[12].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[13].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[12].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[17].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.W) && curPosition == tilePositions[12].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[7].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-// Tile C4
-        else if (Input.GetKeyDown(KeyCode.A) && curPosition == tilePositions[13].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[12].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.D) && curPosition == tilePositions[13].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[14].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[13].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[18].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.W) && curPosition == tilePositions[13].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[8].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-// Tile C5
-        else if (Input.GetKeyDown(KeyCode.A) && curPosition == tilePositions[14].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[13].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[14].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[19].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.W) && curPosition == tilePositions[14].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[9].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-// Tile D1
-        else if (Input.GetKeyDown(KeyCode.D) && curPosition == tilePositions[15].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[16].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
+            if (boxIndex != 4 || boxIndex != 9 || boxIndex != 14 || boxIndex != 19 || boxIndex != 24)
+            {
+                boxIndex += 1;
 
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[15].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[20].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.W) && curPosition == tilePositions[15].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[10].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-        
-// Tile D2
-        else if (Input.GetKeyDown(KeyCode.A) && curPosition == tilePositions[16].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[15].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.D) && curPosition == tilePositions[16].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[17].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[16].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[21].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.W) && curPosition == tilePositions[16].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[11].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-// Tile D3
-        else if (Input.GetKeyDown(KeyCode.A) && curPosition == tilePositions[17].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[16].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.D) && curPosition == tilePositions[17].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[18].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[17].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[22].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.W) && curPosition == tilePositions[17].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[12].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-// Tile D4
-        else if (Input.GetKeyDown(KeyCode.A) && curPosition == tilePositions[18].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[17].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.D) && curPosition == tilePositions[18].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[19].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[18].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[23].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.W) && curPosition == tilePositions[18].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[13].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
-
-// Tile D5
-        else if (Input.GetKeyDown(KeyCode.A) && curPosition == tilePositions[19].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[18].GetComponent<Transform>();
-            Debug.Log(curPosition);
+                if (boxIndex > 24)
+                {
+                    boxIndex = 24;
+                }
+                selectBoss.position = tilePositions[boxIndex].GetComponent<Transform>().position;
+            }
         }
 
-        else if (Input.GetKeyDown(KeyCode.S) && curPosition == tilePositions[19].GetComponent<Transform>())
+        else if (Input.GetKeyDown(KeyCode.S))
         {
-            curPosition = tilePositions[24].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
+            if (boxIndex < 20)
+            {
+                boxIndex += 5;
 
-        else if (Input.GetKeyDown(KeyCode.W) && curPosition == tilePositions[19].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[14].GetComponent<Transform>();
-            Debug.Log(curPosition);
+                selectBoss.position = tilePositions[boxIndex].GetComponent<Transform>().position;
+            }
         }
 
-// Tile E1
-        else if (Input.GetKeyDown(KeyCode.D) && curPosition == tilePositions[20].GetComponent<Transform>())
+        else if (Input.GetKeyDown(KeyCode.W))
         {
-            curPosition = tilePositions[21].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
+            if (boxIndex > 4)
+            {
+                boxIndex -= 5;
 
-        else if (Input.GetKeyDown(KeyCode.W) && curPosition == tilePositions[20].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[15].GetComponent<Transform>();
-            Debug.Log(curPosition);
+                selectBoss.position = tilePositions[boxIndex].GetComponent<Transform>().position;
+            }
         }
 
-// Tile E2
-        else if (Input.GetKeyDown(KeyCode.A) && curPosition == tilePositions[21].GetComponent<Transform>())
+        else if (Input.GetKeyDown(KeyCode.A))
         {
-            curPosition = tilePositions[18].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
+            if (boxIndex != 0 || boxIndex != 5 || boxIndex != 10 || boxIndex != 15 || boxIndex != 20)
+            {
+                boxIndex -= 1;
 
-        else if (Input.GetKeyDown(KeyCode.D) && curPosition == tilePositions[21].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[24].GetComponent<Transform>();
-            Debug.Log(curPosition);
-        }
+                if (boxIndex < 0)
+                {
+                    boxIndex = 0;
+                }
 
-        else if (Input.GetKeyDown(KeyCode.W) && curPosition == tilePositions[21].GetComponent<Transform>())
-        {
-            curPosition = tilePositions[14].GetComponent<Transform>();
-            Debug.Log(curPosition);
+                selectBoss.position = tilePositions[boxIndex].GetComponent<Transform>().position;
+            }
         }
     }
 
     private void BoxMarked()
-    { // check statement for when I press Enter to see if I'm on tile A1, and the box ISN'T used
-        // if not being used, set it to being used, place a red pin, and add the pin to the pin count
+    {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (curPosition == tilePositions[0].GetComponent<Transform>() && tilePositions[0].GetComponent<BoxCheck>().boxChecked == false)
+            if (boxIndex == 0)
             {
-                tilePositions[0].GetComponent<BoxCheck>().boxChecked = true;
-                Debug.Log(tilePositions[0].GetComponent<BoxCheck>().boxChecked);
-                RedPins[0].SetActive(true);
-                pinCount++;
-                Debug.Log(pinCount);
+                if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                {
+                    tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                    Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                    RedPins[0].SetActive(true); // make the red pin visible
+                    pinCount++; // add the now visible pin to the int
+                    Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                }
             }
+
+            else if (boxIndex == 1)
+            {
+                if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                {
+                    tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                    Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                    RedPins[1].SetActive(true); // make the red pin visible
+                    pinCount++; // add the now visible pin to the int
+                    Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                }
+            }
+
+
+                else if (boxIndex == 2)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[2].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+
+
+                else if (boxIndex == 3)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[3].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+
+
+                else if (boxIndex == 4)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[4].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+
+
+                else if (boxIndex == 5)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[5].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+
+
+                else if (boxIndex == 6)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[6].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+
+
+                else if (boxIndex == 7)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[7].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+
+
+                else if (boxIndex == 8)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[8].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+
+
+                else if (boxIndex == 9)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[9].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+
+
+                else if (boxIndex == 10)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[10].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+
+
+                else if (boxIndex == 11)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[11].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+
+
+                else if (boxIndex == 12)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[12].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+
+
+                else if (boxIndex == 13)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[13].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+
+
+                else if (boxIndex == 14)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[14].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+
+
+                else if (boxIndex == 15)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[15].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+
+
+                else if (boxIndex == 16)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[16].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+            
+
+                else if (boxIndex == 17)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[17].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+            
+
+                else if (boxIndex == 18)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[18].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+            
+
+                else if (boxIndex == 19)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[19].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+            
+
+                else if (boxIndex == 20)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[20].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+            
+
+                else if (boxIndex == 21)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[21].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+            
+
+                else if (boxIndex == 22)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[22].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+            
+
+                else if (boxIndex == 23)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[23].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
+            
+
+                else if (boxIndex == 24)
+                {
+                    if (tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked == false)
+                    {
+                        tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked = true; // setting the box on that position to being used
+                        Debug.Log(tilePositions[boxIndex].GetComponent<BoxCheck>().boxChecked); // adding a debug to make sure it's working
+                        RedPins[24].SetActive(true); // make the red pin visible
+                        pinCount++; // add the now visible pin to the int
+                        Debug.Log(pinCount); // debug to check how many pins I currently am storing in the pin count int
+                    }
+                }
         }
     }
 }
