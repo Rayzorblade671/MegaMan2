@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyData : MonoBehaviour
 {
     //Variables
-    [SerializeField] public int strength;
+    [SerializeField] public int physicalDamage;
     [SerializeField] int health;
     [SerializeField] float moveSpeed;
     [SerializeField] Transform target;
@@ -19,11 +19,11 @@ public class EnemyData : MonoBehaviour
     private Rigidbody2D rb;
 
     //Accessors
-    public int Strength
+    public int PhysicalDamage
     {
-        get { return strength; }
+        get { return physicalDamage; }
 
-        set{strength = value;}
+        set{physicalDamage = value;}
     }
 
     public int Health
