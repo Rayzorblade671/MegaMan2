@@ -65,5 +65,28 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+<<<<<<< HEAD
+=======
+    void OnCollisionEnter2D(Collision2D _collision)
+    {
+        isGrounded = true;
+        if (_collision.gameObject.tag=="Enemy")
+        {
 
+            _collision.gameObject.GetComponent<EnemyData>();
+            EnemyData enemyData = _collision.gameObject.GetComponent<EnemyData>();
+            health -= enemyData.PhysicalDamage;
+        }
+
+    }
+
+    void OnCollisionExit2D()
+    {
+        isGrounded = false;
+    }
+>>>>>>> 91eaac1804effd2054d03a5f3ab6b67caf884424
+
+   
+  
+   
 }
