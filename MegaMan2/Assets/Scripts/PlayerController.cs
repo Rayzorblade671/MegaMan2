@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum Direction {LEFT, RIGHT}
 public class PlayerController : MonoBehaviour {
@@ -8,6 +9,8 @@ public class PlayerController : MonoBehaviour {
     public float speed = 5.0f;
     public bool isGrounded = false;
     public float jumpPower = 7.0f;
+    public int health = 28;
+  
 
     private Transform _transform;
     private Rigidbody2D _rigidbody;
@@ -24,6 +27,7 @@ public class PlayerController : MonoBehaviour {
     {
         _transform = GetComponent(typeof(Transform)) as Transform;
         _rigidbody = GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
+        print(health);
 	}
 	
 	// Update is called once per frame
@@ -31,6 +35,11 @@ public class PlayerController : MonoBehaviour {
     {
         MovePlayer();
         Jump();
+
+        if(health <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
 	}
 
     //Self-explainatory 
@@ -56,14 +65,5 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter2D()
-    {
-        isGrounded = true;
-    }
-
-    void OnCollisionExit2D()
-    {
-        isGrounded = false;
-    }
 
 }

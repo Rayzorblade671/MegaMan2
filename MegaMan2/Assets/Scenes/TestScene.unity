@@ -191,7 +191,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4176413013292686, guid: e2871c886cb2b3f4688383cf99676551, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.11
+      value: 6.25
       objectReference: {fileID: 0}
     - target: {fileID: 4176413013292686, guid: e2871c886cb2b3f4688383cf99676551, type: 2}
       propertyPath: m_LocalPosition.z
@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 469265679}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -330,7 +330,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4176413013292686, guid: e2871c886cb2b3f4688383cf99676551, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -3.19
+      value: -5.52
       objectReference: {fileID: 0}
     - target: {fileID: 4176413013292686, guid: e2871c886cb2b3f4688383cf99676551, type: 2}
       propertyPath: m_LocalPosition.z
@@ -468,7 +468,7 @@ GameObject:
   - component: {fileID: 1578252889}
   m_Layer: 0
   m_Name: Ceiling
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -546,7 +546,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1578252888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 45, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -602,6 +602,7 @@ MonoBehaviour:
   speed: 5
   isGrounded: 0
   jumpPower: 7
+  health: 28
 --- !u!50 &1865047682
 Rigidbody2D:
   serializedVersion: 4

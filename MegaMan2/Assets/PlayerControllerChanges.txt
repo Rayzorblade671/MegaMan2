@@ -1,0 +1,12 @@
+void OnCollisionEnter2D(Collision2D _collision)
+    {
+        isGrounded = true;
+        if (_collision.gameObject.tag=="Enemy")
+        {
+
+            _collision.gameObject.GetComponent<EnemyData>();
+            EnemyData enemyData = _collision.gameObject.GetComponent<EnemyData>();
+            health -= enemyData.PhysicalDamage;
+        }
+
+    }
