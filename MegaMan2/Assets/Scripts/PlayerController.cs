@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+/*Name: Lyndon Jones
+ *Date: 1/17/18
+ *Credit: Project & Portfolio 4 - MegaMan 2 group project
+ *Purpose: Basic player movements, health, and damage taking                               */
 public enum Direction {LEFT, RIGHT}
 public class PlayerController : MonoBehaviour {
 

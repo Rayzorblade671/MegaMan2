@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*Name: Lyndon Jones
+ *Date: 1/17/18
+ *Credit: Project & Portfolio 4 - MegaMan 2 group project
+ *Purpose: Sets damage, speed, and direction for bullet prefab                            */
 public class Bullet : MonoBehaviour
 {
 
