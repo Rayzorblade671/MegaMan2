@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/*--------------------------------------------------------------
+ * Name: Nathan Geno
+ * Date: 1/17/18
+ * Credit: Project and Portfolio 4 - MegaMan 2 group project
+ * Purpose: Create a "Mole" type enemy
+ * ------------------------------------------------------------*/
+
 public class MoleStateMachine : MonoBehaviour
 {
     [SerializeField] private bool movingUp = true;

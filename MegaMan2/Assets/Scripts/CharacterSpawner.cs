@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/*--------------------------------------------------------------
+ * Name: Nathan Geno
+ * Date: 1/15/18
+ * Credit: Project and Portfolio 4 - MegaMan 2 group project
+ * Purpose: Create a data holder for a Character Spawner State Machine
+ * ------------------------------------------------------------*/
+
 public class CharacterSpawner : MonoBehaviour
 {
     //Variables

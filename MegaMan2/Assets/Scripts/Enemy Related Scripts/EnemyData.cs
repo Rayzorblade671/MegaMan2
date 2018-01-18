@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*--------------------------------------------------------------
+ * Name: Nathan Geno
+ * Date: 1/17/18
+ * Credit: Project and Portfolio 4 - MegaMan 2 group project
+ * Purpose: Create a default data holder for all Enemy prefabs
+ * ------------------------------------------------------------*/
+
 public class EnemyData : MonoBehaviour
 {
     //Variables
