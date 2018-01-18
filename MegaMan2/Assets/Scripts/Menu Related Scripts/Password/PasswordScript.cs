@@ -11,28 +11,29 @@ public class PasswordScript : MonoBehaviour
     public GameObject[] tilePositions; // array that holds all the grid space positions
     private int pinCount = 0; // the int that counts how many pins I have on the board
     int boxIndex = 0;
-    bool CorrectPW;
-    [SerializeField] TextMesh countingPins;
+    bool CorrectPW; // to check if the password is correct
+    [SerializeField] TextMesh countingPins; //to update the pin count number on screen
 
     // Use this for initialization
     void Start()
     {
 
-        selectBoss = gameObject.GetComponent<Transform>();
+        selectBoss = gameObject.GetComponent<Transform>(); //Setting the transform of the prefab
     }
 
     // Update is called once per frame
     void Update()
     {
-        BoxSelection();
+        BoxSelection(); //Calling these functions to check them every frame
         BoxMarked();
 
 
-        if (CorrectPW == true)
+        if (CorrectPW == true) //If the password is correct, the load the boss selection level
         {
-            SceneManager.LoadScene("TestScene");
+            SceneManager.LoadScene("BossLevel");
         }
 
+        // checking to see if the password is correct. If it's not then reload the start password scene
         if (pinCount >= 9)
         {
             if (tilePositions[1].GetComponent<BoxCheck>().boxChecked == true && tilePositions[5].GetComponent<BoxCheck>().boxChecked == true && tilePositions[11].GetComponent<BoxCheck>().boxChecked == true && tilePositions[14].GetComponent<BoxCheck>().boxChecked == true && tilePositions[15].GetComponent<BoxCheck>().boxChecked == true && tilePositions[16].GetComponent<BoxCheck>().boxChecked == true && tilePositions[18].GetComponent<BoxCheck>().boxChecked == true && tilePositions[20].GetComponent<BoxCheck>().boxChecked == true && tilePositions[23].GetComponent<BoxCheck>().boxChecked == true)
@@ -50,6 +51,7 @@ public class PasswordScript : MonoBehaviour
             }
         }
 
+        //updating the text mesh on the number to accurately reflect the numbers of pins used
         if (pinCount == 9)
         {
             countingPins.GetComponent<TextMesh>().text = "";
