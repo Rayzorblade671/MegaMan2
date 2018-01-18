@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour {
 
             _collision.gameObject.GetComponent<EnemyData>();
             EnemyData enemyData = _collision.gameObject.GetComponent<EnemyData>();
-            health -= enemyData.Strength;
+            health -= enemyData.PhysicalDamage;
         }
 
     }
