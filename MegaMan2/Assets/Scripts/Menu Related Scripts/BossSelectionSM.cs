@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class BossSelectionSM : MonoBehaviour {
 
     private BossSelection bossScript;
+    
 
     enum tileStates
     {
@@ -98,165 +99,165 @@ public class BossSelectionSM : MonoBehaviour {
 
     void BubbleState()
     {
-        if(bossScript.timerMaximum <= bossScript.timerHitMaximum)
+        if(BossSelection.instance.timerMaximum <= BossSelection.instance.timerHitMaximum)
         {
-            bossScript.BubbleMan();
+            BossSelection.instance.BubbleMan();
             if (Input.GetKeyDown(KeyCode.D))
             {
-                bossScript.AirMan();
+                BossSelection.instance.AirMan();
                 SetState(tileStates.Air);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
-                bossScript.HeatMan();
+                BossSelection.instance.HeatMan();
                 SetState(tileStates.Heat);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
         }
     }
 
     void AirState()
     {
-        if (bossScript.timerMaximum <= bossScript.timerHitMaximum)
+        if (BossSelection.instance.timerMaximum <= BossSelection.instance.timerHitMaximum)
         {
-            bossScript.AirMan();
+            BossSelection.instance.AirMan();
             if (Input.GetKeyDown(KeyCode.D))
             {
-                bossScript.QuickMan();
+                BossSelection.instance.QuickMan();
                 SetState(tileStates.Quick);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
-                bossScript.BubbleMan();
+                BossSelection.instance.BubbleMan();
                 SetState(tileStates.Bubble);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
-                bossScript.DrWily();
+                BossSelection.instance.DrWily();
                 SetState(tileStates.Wily);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
         }
     }
     void QuickState()
     {
-        if (bossScript.timerMaximum <= bossScript.timerHitMaximum)
+        if (BossSelection.instance.timerMaximum <= BossSelection.instance.timerHitMaximum)
         {
-            bossScript.QuickMan();
+            BossSelection.instance.QuickMan();
             if (Input.GetKeyDown(KeyCode.S))
             {
-                bossScript.WoodMan();
+                BossSelection.instance.WoodMan();
                 SetState(tileStates.Wood);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
-                bossScript.AirMan();
+                BossSelection.instance.AirMan();
                 SetState(tileStates.Air);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
         }
     }
     void HeatState()
     {
-        if (bossScript.timerMaximum <= bossScript.timerHitMaximum)
+        if (BossSelection.instance.timerMaximum <= BossSelection.instance.timerHitMaximum)
         {
-            bossScript.HeatMan();
+            BossSelection.instance.HeatMan();
             if (Input.GetKeyDown(KeyCode.W))
             {
-                bossScript.BubbleMan();
+                BossSelection.instance.BubbleMan();
                 SetState(tileStates.Bubble);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
-                bossScript.DrWily();
+                BossSelection.instance.DrWily();
                 SetState(tileStates.Wily);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
-                bossScript.MetalMan();
+                BossSelection.instance.MetalMan();
                 SetState(tileStates.Metal);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
         }
     }
     void WilyState()
     {
-        if (bossScript.timerMaximum <= bossScript.timerHitMaximum)
+        if (BossSelection.instance.timerMaximum <= BossSelection.instance.timerHitMaximum)
         {
-            bossScript.DrWily();
+            BossSelection.instance.DrWily();
             if (Input.GetKeyDown(KeyCode.W))
             {
-                bossScript.AirMan();
+                BossSelection.instance.AirMan();
                 SetState(tileStates.Air);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
-                bossScript.WoodMan();
+                BossSelection.instance.WoodMan();
                 SetState(tileStates.Wood);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
-                bossScript.HeatMan();
+                BossSelection.instance.HeatMan();
                 SetState(tileStates.Heat);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
-                bossScript.FlashMan();
+                BossSelection.instance.FlashMan();
                 SetState(tileStates.Flash);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
         }
     }
     void WoodState()
     {
-        if (bossScript.timerMaximum <= bossScript.timerHitMaximum)
+        if (BossSelection.instance.timerMaximum <= BossSelection.instance.timerHitMaximum)
         {
-            bossScript.WoodMan();
+            BossSelection.instance.WoodMan();
             if (Input.GetKeyDown(KeyCode.W))
             {
-                bossScript.QuickMan();
+                BossSelection.instance.QuickMan();
                 SetState(tileStates.Quick);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
-                bossScript.CrashMan();
+                BossSelection.instance.CrashMan();
                 SetState(tileStates.Crash);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
-                bossScript.DrWily();
+                BossSelection.instance.DrWily();
                 SetState(tileStates.Wily);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
         }
     }
     void MetalState()
     {
-        if (bossScript.timerMaximum <= bossScript.timerHitMaximum)
+        if (BossSelection.instance.timerMaximum <= BossSelection.instance.timerHitMaximum)
         {
-            bossScript.MetalMan();
+            BossSelection.instance.MetalMan();
             if (Input.GetKeyDown(KeyCode.W))
             {
-                bossScript.HeatMan();
+                BossSelection.instance.HeatMan();
                 SetState(tileStates.Heat);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
-                bossScript.FlashMan();
+                BossSelection.instance.FlashMan();
                 SetState(tileStates.Flash);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
             else if (Input.GetKeyDown(KeyCode.Return))
             {
@@ -266,45 +267,45 @@ public class BossSelectionSM : MonoBehaviour {
     }
     void FlashState()
     {
-        if (bossScript.timerMaximum <= bossScript.timerHitMaximum)
+        if (BossSelection.instance.timerMaximum <= BossSelection.instance.timerHitMaximum)
         {
-            bossScript.FlashMan();
+            BossSelection.instance.FlashMan();
             if (Input.GetKeyDown(KeyCode.W))
             {
-                bossScript.DrWily();
+                BossSelection.instance.DrWily();
                 SetState(tileStates.Wily);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
-                bossScript.CrashMan();
+                BossSelection.instance.CrashMan();
                 SetState(tileStates.Crash);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
-                bossScript.MetalMan();
+                BossSelection.instance.MetalMan();
                 SetState(tileStates.Metal);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
         }
     }
     void CrashState()
     {
-        if (bossScript.timerMaximum <= bossScript.timerHitMaximum)
+        if (BossSelection.instance.timerMaximum <= BossSelection.instance.timerHitMaximum)
         {
-            bossScript.CrashMan();
+            BossSelection.instance.CrashMan();
             if (Input.GetKeyDown(KeyCode.W))
             {
-                bossScript.WoodMan();
+                BossSelection.instance.WoodMan();
                 SetState(tileStates.Wood);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
-                bossScript.FlashMan();
+                BossSelection.instance.FlashMan();
                 SetState(tileStates.Flash);
-                bossScript.ResetTimer();
+                BossSelection.instance.ResetTimer();
             }
         }
     }

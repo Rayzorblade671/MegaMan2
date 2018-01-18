@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyData : MonoBehaviour
 {
     //Variables
-    [SerializeField] int strength;
+    [SerializeField] public int physicalDamage;
     [SerializeField] int health;
     [SerializeField] float moveSpeed;
     [SerializeField] Transform target;
@@ -16,13 +16,14 @@ public class EnemyData : MonoBehaviour
     private Animator animator;
     private float distanceToCamX;
     private float distanceToCamY;
+    private Rigidbody2D rb;
 
     //Accessors
-    public int Strength
+    public int PhysicalDamage
     {
-        get { return strength; }
+        get { return physicalDamage; }
 
-        set{strength = value;}
+        set{physicalDamage = value;}
     }
 
     public int Health
@@ -81,9 +82,24 @@ public class EnemyData : MonoBehaviour
         set { distanceToCamY = value; }
     }
 
+    public void Damage(int dmg)
+    {
+        health -= dmg;
+        if (health <= 0)
+            Destroy(gameObject);
+    }
+
+    public Rigidbody2D Rb
+    {
+        get { return rb; }
+
+        set { rb = value; }
+    }
+
     // Use this for initialization
     void Start()
     {
+        rb = gameObject.GetComponent<Rigidbody2D>();
         mainCam = Camera.main;
     }
 
