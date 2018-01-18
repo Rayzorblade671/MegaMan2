@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Name - Kaitlin Soter
+ * 1/17/2018
+ * Credit: Project & Portfolio 4 - Mega Man 2 group project
+ * Purpose: holds transform positions for the SelectBoss Gameobject for where it moves
+ */
+
 public class BossSelection : MonoBehaviour {
 
     [SerializeField] Transform selectBoss;

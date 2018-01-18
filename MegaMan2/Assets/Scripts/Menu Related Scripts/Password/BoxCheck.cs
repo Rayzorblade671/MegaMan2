@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Name - Kaitlin Soter
+ * 1/17/2018
+ * Credit: Project & Portfolio 4 - Mega Man 2 group project
+ * Purpose: used alongside passwordscript and returns the bool for seeing if a box is checked/usable
+ */
+
 public class BoxCheck : MonoBehaviour {
 
 

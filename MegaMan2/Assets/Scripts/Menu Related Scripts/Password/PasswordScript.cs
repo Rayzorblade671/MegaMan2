@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*
+ * Name - Kaitlin Soter
+ * 1/17/2018
+ * Credit: Project & Portfolio 4 - Mega Man 2 group project
+ * Purpose: Holds the function to move the selectboss prefab and show red pins when player hits enter
+ */
+
 public class PasswordScript : MonoBehaviour
 {
 

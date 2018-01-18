@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*
+ * Name - Kaitlin Soter
+ * 1/17/2018
+ * Credit: Project & Portfolio 4 - Mega Man 2 group project
+ * Purpose: Movement controls for the Start/Password scene
+ */
+
 public class BN2 : MonoBehaviour {
 
     //make sure to keep UnityEngine.SceneManagement in top
