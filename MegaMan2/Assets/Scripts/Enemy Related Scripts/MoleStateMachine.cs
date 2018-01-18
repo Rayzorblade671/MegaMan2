@@ -35,6 +35,7 @@ public class MoleStateMachine : MonoBehaviour
 
         enemyData.Health = UnityEngine.Random.Range(6, 10);
         enemyData.MoveSpeed = 3;
+        enemyData.PhysicalDamage = 3;
 
         if (transform.position.y < enemyData.MainCam.transform.position.y)
             movingUp = true;
