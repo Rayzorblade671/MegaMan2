@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour {
     public float speed = 5.0f;
     public bool isGrounded = false;
     public float jumpPower = 7.0f;
+    public int health = 28;
+  
 
     private Transform _transform;
     private Rigidbody2D _rigidbody;
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour {
     {
         _transform = GetComponent(typeof(Transform)) as Transform;
         _rigidbody = GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
+        print(health);
 	}
 	
 	// Update is called once per frame
@@ -56,9 +59,17 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter2D()
+    void OnCollisionEnter2D(Collision2D _collision)
     {
         isGrounded = true;
+        if (_collision.gameObject.tag=="Enemy")
+        {
+
+            _collision.gameObject.GetComponent<EnemyData>();
+            EnemyData enemyData = _collision.gameObject.GetComponent<EnemyData>();
+            health -= enemyData.Strength;
+        }
+
     }
 
     void OnCollisionExit2D()
@@ -66,4 +77,7 @@ public class PlayerController : MonoBehaviour {
         isGrounded = false;
     }
 
+   
+  
+   
 }
