@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum Direction {LEFT, RIGHT}
 public class PlayerController : MonoBehaviour {
@@ -34,6 +35,11 @@ public class PlayerController : MonoBehaviour {
     {
         MovePlayer();
         Jump();
+
+        if(health <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
 	}
 
     //Self-explainatory 
