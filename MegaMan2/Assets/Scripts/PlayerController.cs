@@ -79,6 +79,10 @@ public class PlayerController : MonoBehaviour {
             health -= enemyData.PhysicalDamage;
         }
 
+        if (_collision.gameObject.tag == "Killzone")
+        {
+            health = 0;
+        }
     }
 
     void OnCollisionExit2D()
