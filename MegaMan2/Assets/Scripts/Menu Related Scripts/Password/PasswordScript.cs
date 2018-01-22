@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 /*
  * Name - Kaitlin Soter
  * 1/17/2018
- * Credit: Project & Portfolio 4 - Mega Man 2 group project
+ * Credit: Project & Portfolio 4 - Mega Man 2 group project, Received Help from Justin Gallo for the function "BoxSelection"
  * Purpose: Holds the function to move the selectboss prefab and show red pins when player hits enter
  */
 
@@ -26,6 +26,8 @@ public class PasswordScript : MonoBehaviour
     {
 
         selectBoss = gameObject.GetComponent<Transform>(); //Setting the transform of the prefab
+
+        Cursor.visible = false; // Sets the mouse cursor to invisible
     }
 
     // Update is called once per frame
@@ -156,7 +158,7 @@ public class PasswordScript : MonoBehaviour
 
     private void BoxMarked()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             if (boxIndex == 0)
             {

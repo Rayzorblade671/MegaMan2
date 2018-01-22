@@ -26,6 +26,8 @@ public class BossSelection : MonoBehaviour {
         selectBoss.GetComponent<Transform>();
 
         ResetTimer();
+
+        Cursor.visible = false; // Sets the mouse cursor to invisible
 	}
 
     void Update()

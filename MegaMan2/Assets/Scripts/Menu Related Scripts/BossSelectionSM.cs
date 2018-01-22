@@ -266,7 +266,7 @@ public class BossSelectionSM : MonoBehaviour {
                 SetState(tileStates.Flash);
                 BossSelection.instance.ResetTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
+            else if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
             {
                 SceneManager.LoadScene("TestScene");
             }
