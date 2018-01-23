@@ -31,7 +31,8 @@ public class PlayerController : MonoBehaviour {
         _transform = GetComponent(typeof(Transform)) as Transform;
         _rigidbody = GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
         print(health);
-	}
+        Cursor.visible = false;
+    }
 	
 	// Update is called once per frame
 	void Update ()
