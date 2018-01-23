@@ -83,7 +83,7 @@ public class LevelSelection : MonoBehaviour
 
         else if (Input.GetKeyDown(KeyCode.W))
         {
-            if (bossIndex > 3)
+            if (bossIndex > 2)
             {
                 bossIndex -= 3;
 
@@ -93,7 +93,7 @@ public class LevelSelection : MonoBehaviour
 
         else if (Input.GetKeyDown(KeyCode.A))
         {
-            if (bossIndex != 0 || bossIndex != 4 || bossIndex != 7)
+            if (bossIndex != 0 || bossIndex != 3 || bossIndex != 6)
             {
                 bossIndex -= 1;
 
