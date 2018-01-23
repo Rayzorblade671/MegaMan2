@@ -80,14 +80,14 @@ public class CharacterSpawnerStateMachine : MonoBehaviour
             isAlive = true;
 
 
-        if (characterSpawner.SpawnDistance >= 16 || characterSpawner.SpawnDistance <= -16)
+        if (characterSpawner.SpawnDistance >= 12 || characterSpawner.SpawnDistance <= -12)
         {
             characterSpawner.CameraCanSee = false;
         }
 
         if (characterSpawner.CameraCanSee == false && isAlive == false)
         {
-            if (characterSpawner.SpawnDistance <= 15 && characterSpawner.SpawnDistance >= -15)
+            if (characterSpawner.SpawnDistance <= 11 && characterSpawner.SpawnDistance >= -11)
             {
                 characterSpawner.CameraCanSee = true;
                 SetState(CharacterSpawnerStates.ON);
