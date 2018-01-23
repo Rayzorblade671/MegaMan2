@@ -17,13 +17,13 @@ public class ButtonNavigation : MonoBehaviour {
 
     //Arrow Function Variables
     int index = 0; //The int that holds the location of the buttons
-    int MenuChoices = 2; //The int that holds the amonut of menu choices
     private float yOffset = 1.45f; //How far the sphere will travel on the yaxis when the button is pressed
 
     //Making Arrow blink continuously
     private void Start()
     {
         InvokeRepeating("ArrowBlinking", 0f, 0.17f); //Making the arrow blink forever
+        Cursor.visible = false; // Sets the mouse cursor to invisible
     }
 
     void Update()
@@ -58,7 +58,7 @@ public class ButtonNavigation : MonoBehaviour {
 //Scene Loading Code
 
         //If selecting normal, load the boss selection scene for Normal mode
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             if (index == 0) //is the player on Normal?
             {
@@ -66,7 +66,7 @@ public class ButtonNavigation : MonoBehaviour {
             }
         }
         //If selecting Difficult, load the boss selection scene for Difficult mode
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             if (index == 1) //is the player on difficult?
             {

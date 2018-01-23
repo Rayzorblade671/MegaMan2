@@ -1714,34 +1714,33 @@ GameObject:
   m_PrefabParentObject: {fileID: 1080127628219906, guid: ef6156e69f3d9594db79cf978404f441,
     type: 2}
   m_PrefabInternal: {fileID: 1689286584}
---- !u!4 &1689286586 stripped
+--- !u!114 &1689286586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1689286585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 817f6c5c14cd2424aaec19672eb2cbd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectBoss: {fileID: 1689286587}
+  bossPositions:
+  - {fileID: 1810049196}
+  - {fileID: 1646587085}
+  - {fileID: 1357464205}
+  - {fileID: 773672171}
+  - {fileID: 1604569061}
+  - {fileID: 1721364220}
+  - {fileID: 630308796}
+  - {fileID: 1614306802}
+  - {fileID: 1464922602}
+--- !u!4 &1689286587 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4076329038186560, guid: ef6156e69f3d9594db79cf978404f441,
     type: 2}
   m_PrefabInternal: {fileID: 1689286584}
---- !u!114 &1689286587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1689286585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72bd1ae5b7bfb754587f7f71292351ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1689286588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1689286585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10e6133c5be2fe54598bc3ee17335b36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectBoss: {fileID: 1689286586}
 --- !u!1 &1721364220
 GameObject:
   m_ObjectHideFlags: 0

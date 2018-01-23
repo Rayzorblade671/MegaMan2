@@ -10,12 +10,15 @@ public class Weapon : MonoBehaviour {
     public GameObject bullet;
 
     private PlayerController playerMovement;
+    private Transform blaster;
 
 
 	// Use this for initialization
 	void Start ()
     {
-        playerMovement = GetComponent<PlayerController>();	
+        playerMovement = GetComponent<PlayerController>();
+
+        blaster = gameObject.transform.Find("Blaster");
 	}
 	
 	//Instantiates the bullets
@@ -24,7 +27,7 @@ public class Weapon : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.K))
         {
-            var tBullet = Instantiate(bullet, gameObject.transform.position, bullet.transform.rotation) as GameObject;
+            var tBullet = Instantiate(bullet, blaster.transform.position, bullet.transform.rotation) as GameObject;
             tBullet.GetComponent<Bullet>().bulletDirection = playerMovement.PlayerDirection;
            
         }

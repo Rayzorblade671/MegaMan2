@@ -1,0 +1,9 @@
+Controls for Mega Man 2
+
+W, A, S, D for Movement, and Navigating Menus
+
+Enter key to select something in the menu
+
+J for Jump
+
+K for Shoot

@@ -16,13 +16,14 @@ public class BN2 : MonoBehaviour {
 
     //Arrow Function Variables
     int index = 0;
-    int MenuChoices = 2;
     private float yOffset = 1f;
 
     //Making Arrow blink continuously
     private void Start()
     {
         InvokeRepeating("ArrowBlinking", 0f, 0.17f);
+
+        Cursor.visible = false; // Sets the mouse cursor to invisible
     }
 
     void Update()
@@ -57,7 +58,7 @@ public class BN2 : MonoBehaviour {
         //Scene Loading Code
 
         //If selecting Start, load the level selection menu
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             if (index == 0)
             {
@@ -65,7 +66,7 @@ public class BN2 : MonoBehaviour {
             }
         }
         //If selecting Password, load the Password scene
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             if (index == 1)
             {

@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
     public bool isGrounded = false;
     public float jumpPower = 7.0f;
     public int health = 28;
+    public bool facingRight = true;
   
 
     private Transform _transform;
@@ -52,12 +53,14 @@ public class PlayerController : MonoBehaviour {
         float translate = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         transform.Translate(translate, 0, 0);
 
-        if (translate > 0)
+        if (translate > 0 && !facingRight)
         {
             playerDirection = Direction.RIGHT;
-        } else if (translate < 0)
+            Flip();
+        } else if (translate < 0 && facingRight)
         {
             playerDirection = Direction.LEFT;
+            Flip();
         }
     }
 
@@ -67,6 +70,14 @@ public class PlayerController : MonoBehaviour {
         {
             _rigidbody.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
         }
+    }
+
+    void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
 
     void OnCollisionEnter2D(Collision2D _collision)
@@ -80,6 +91,14 @@ public class PlayerController : MonoBehaviour {
             health -= enemyData.PhysicalDamage;
         }
 
+        if (_collision.gameObject.tag == "Killzone")
+        {
+            health = 0;
+        }
+        if (_collision.gameObject.tag == "Projectile")
+        {
+            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), _collision.gameObject.GetComponent<Collider2D>());
+        }
     }
 
     void OnCollisionExit2D()
