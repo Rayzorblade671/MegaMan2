@@ -16,7 +16,6 @@ public class BN2 : MonoBehaviour {
 
     //Arrow Function Variables
     int index = 0;
-    int MenuChoices = 2;
     private float yOffset = 1f;
 
     //Making Arrow blink continuously
