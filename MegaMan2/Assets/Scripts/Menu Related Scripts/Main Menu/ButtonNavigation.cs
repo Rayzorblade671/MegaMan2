@@ -17,7 +17,6 @@ public class ButtonNavigation : MonoBehaviour {
 
     //Arrow Function Variables
     int index = 0; //The int that holds the location of the buttons
-    int MenuChoices = 2; //The int that holds the amonut of menu choices
     private float yOffset = 1.45f; //How far the sphere will travel on the yaxis when the button is pressed
 
     //Making Arrow blink continuously

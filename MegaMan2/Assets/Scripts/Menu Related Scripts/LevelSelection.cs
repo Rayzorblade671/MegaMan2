@@ -15,7 +15,7 @@ public class LevelSelection : MonoBehaviour
 
     [SerializeField] Transform selectBoss; // this holds the SelectBoss prefab that shows the player what's highlighted
     public GameObject[] bossPositions; // array that holds all the grid space positions
-    int bossIndex = 0;
+    int bossIndex = 0; // this index works with the array above
 
     //booleans for all the bosses
     bool BubbleMan = false;
@@ -44,6 +44,8 @@ public class LevelSelection : MonoBehaviour
         BoxSelection(); //Calling these functions to check them every frame
         BoxMarked();
 
+        //If Statements for all the bosses, currently MetalMan is the only functioning stage, so only Metal Man's is here.
+
         if (MetalMan == true) //If the player hits the Metal Man option, load Metal Man's stage
         {
             SceneManager.LoadScene("TestScene");
@@ -52,17 +54,20 @@ public class LevelSelection : MonoBehaviour
 
     private void BoxSelection()
     {
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D)) // If you press D,
         {
+            // and the cursor is not on QuickMan, WoodMan, or Crash Man
             if (bossIndex != 2 || bossIndex != 5 || bossIndex != 8)
             {
+                //add one to the index
                 bossIndex += 1;
 
-                if (bossIndex > 8)
+                if (bossIndex > 8) //if the index is greater than 8, set it to 8, so it can't go past 8
                 {
                     bossIndex = 8;
                 }
                 selectBoss.position = bossPositions[bossIndex].GetComponent<Transform>().position;
+                // set the position of the prefab to be where the current index is located
             }
         }
 
