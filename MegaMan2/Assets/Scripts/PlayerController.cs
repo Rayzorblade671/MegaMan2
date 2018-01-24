@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     public float jumpPower = 7.0f;
     public int health = 28;
     public bool facingRight = true;
+    public SliderJoint2D healthBarSlider; 
   
 
     private Transform _transform;
