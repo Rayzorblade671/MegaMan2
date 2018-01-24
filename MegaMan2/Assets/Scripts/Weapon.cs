@@ -8,6 +8,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour {
 
     public GameObject bullet;
+    public GameObject metalWeapon;
 
     private PlayerController playerMovement;
     private Transform blaster;
@@ -31,6 +32,12 @@ public class Weapon : MonoBehaviour {
             tBullet.GetComponent<Bullet>().bulletDirection = playerMovement.PlayerDirection;
            
         }
-        	
-	}
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            var tMetalWeapon = Instantiate(metalWeapon, blaster.transform.position, metalWeapon.transform.rotation) as GameObject;
+            tMetalWeapon.GetComponent<MetalWeapon>().metalDirection = playerMovement.PlayerDirection;
+
+        }
+
+    }
 }
